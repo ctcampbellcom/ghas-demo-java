@@ -1,0 +1,19 @@
+name: Repository Configuration
+
+on:
+  push:
+
+permissions: write-all
+
+jobs:
+  repo-config:
+    if: github.event.head_commit.message == 'Initial commit' && github.run_number == 1
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - run: gh api /repos/{owner}/{repo}/branches/main/protection --method PUT --input '.github/workflows/api_bodies/branch_protection_body.json'
+        env:
+          GITHUB_TOKEN: ${{ secrets.INITIALISE_PAT }}
