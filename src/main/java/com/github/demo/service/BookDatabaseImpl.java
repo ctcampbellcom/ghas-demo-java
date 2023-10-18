@@ -153,6 +153,7 @@ public class BookDatabaseImpl implements BookDatabase {
      */
     private void initializeAndPopulateDatabase() throws BookServiceException {
         Statement statement = null;
+        Statement anotherStatement = null;
         try {
             // Initialize the database tables for in memory database
             statement = connection.createStatement();
